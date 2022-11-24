@@ -18,9 +18,8 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
-}
+
+const concatenateStrings = (str1, str2) => str1 + str2;
 
 
 /**
@@ -34,9 +33,8 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  throw new Error('Not implemented');
-}
+
+const getStringLength = (str) => str.length;
 
 /**
  * Returns the result of string template and given parameters firstName and lastName.
@@ -51,9 +49,8 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
-}
+
+const getStringFromTemplate = (firstName, lastName) => `Hello, ${firstName} ${lastName}!`;
 
 /**
  * Extracts a name from template string 'Hello, First_Name Last_Name!'.
@@ -65,9 +62,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
-}
+
+const extractNameFromTemplate = (str) => str.replace('Hello, ', '').replace('!', '');
 
 
 /**
@@ -80,9 +76,8 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
-}
+
+const getFirstChar = (str) => str[0];
 
 /**
  * Removes a leading and trailing whitespace characters from string.
@@ -95,9 +90,8 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
-}
+
+const removeLeadingAndTrailingWhitespaces = (str) => str.trim();
 
 /**
  * Returns a string that repeated the specified number of times.
@@ -110,9 +104,8 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
-}
+
+const repeatString = (str, count) => str.repeat(count);
 
 /**
  * Remove the first occurrence of string inside another string
@@ -126,9 +119,8 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
-}
+
+const removeFirstOccurrences = (str, value) => str.replace(value, '');
 
 /**
  * Remove the first and last angle brackets from tag string
@@ -141,9 +133,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
-}
+
+const unbracketTag = (str) => str.replace('>', '').replace('<', '');
 
 
 /**
@@ -156,9 +147,8 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
-}
+
+const convertToUpperCase = (str) => str.toUpperCase();
 
 /**
  * Extracts e-mails from single string with e-mails list delimeted by semicolons
@@ -175,9 +165,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
-}
+
+const extractEmails = (str) => str.split(';');
 
 /**
  * Returns the string representation of rectangle with specified width and height
