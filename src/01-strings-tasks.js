@@ -191,8 +191,20 @@ const extractEmails = (str) => str.split(';');
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+
+function getRectangleString(width, height) {
+  const makeRow = (symbol) => symbol.repeat(width - 2);
+  let result = '';
+  for (let h = 1; h <= height; h += 1) {
+    if (h === 1) {
+      result += `┌${makeRow('─')}┐\n`;
+    } else if (h === height) {
+      result += `└${makeRow('─')}┘\n`;
+    } else {
+      result += `│${makeRow(' ')}│\n`;
+    }
+  }
+  return result;
 }
 
 
@@ -212,8 +224,21 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+
+function encodeToRot13(str) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const rot13 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let result = str.split('');
+  result = result.map((symbol) => {
+    let newSymbol = '';
+    if (alphabet.includes(symbol)) {
+      newSymbol = rot13[alphabet.indexOf(symbol)];
+    } else {
+      newSymbol = symbol;
+    }
+    return newSymbol;
+  });
+  return result.join('');
 }
 
 /**
@@ -229,9 +254,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
-}
+
+const isString = (str) => typeof str === 'string' || str instanceof String;
 
 
 /**
@@ -258,8 +282,15 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+
+function getCardId(card) {
+  const deck = [
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
+  ];
+  return deck.indexOf(card);
 }
 
 
