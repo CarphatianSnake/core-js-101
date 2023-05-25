@@ -118,6 +118,7 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
+
   element(/* value */) {
     throw new Error('Not implemented');
   },
@@ -146,7 +147,6 @@ const cssSelectorBuilder = {
     throw new Error('Not implemented');
   },
 };
-
 
 module.exports = {
   Rectangle,
