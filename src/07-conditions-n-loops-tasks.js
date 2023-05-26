@@ -245,10 +245,8 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
-}
 
+const reverseString = (str) => str.split('').reverse().join('');
 
 /**
  * Reverse the specified integer number (put all digits in reverse order)
