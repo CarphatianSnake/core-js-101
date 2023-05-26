@@ -396,8 +396,20 @@ const toNaryString = (num, n) => num.toString(n);
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let result = '';
+  const splitedPathes = pathes.map((path) => path.replaceAll('/', '/|').split('|'));
+  const sortedPathes = splitedPathes.sort((a, b) => a.length - b.length);
+
+  for (let i = 0; i < sortedPathes[0].length; i += 1) {
+    for (let j = 1; j < sortedPathes.length; j += 1) {
+      if (sortedPathes[j][i] !== sortedPathes[0][i]) {
+        return result;
+      }
+    }
+    result += sortedPathes[0][i];
+  }
+  return result;
 }
 
 
