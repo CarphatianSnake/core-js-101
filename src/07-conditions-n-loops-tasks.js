@@ -260,9 +260,8 @@ const reverseString = (str) => str.split('').reverse().join('');
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
-}
+
+const reverseInteger = (num) => reverseString(`${num}`);
 
 
 /**
