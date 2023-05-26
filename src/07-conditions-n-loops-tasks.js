@@ -353,7 +353,6 @@ function isBracketsBalanced(str) {
   return !stack.length;
 }
 
-
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
  * representation of specified number.
