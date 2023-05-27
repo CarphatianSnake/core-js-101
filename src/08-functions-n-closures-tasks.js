@@ -59,9 +59,8 @@ const getPowerFunction = (ex) => (x) => x ** ex;
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
-}
+const getPolynom = (...args) => (x) => args
+  .reduce((acc, arg, i, arr) => acc + (arg * x ** (arr.length - 1 - i)), 0);
 
 
 /**
