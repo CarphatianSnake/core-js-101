@@ -478,8 +478,62 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const checkResult = (arr) => (
+    arr.length === 3
+      ? arr.reduce((acc, item) => (acc === item ? item : undefined))
+      : undefined);
+
+  const checkRows = () => {
+    for (let i = 0; i < position.length; i += 1) {
+      const res = [];
+      for (let j = 0; j < position[i].length; j += 1) {
+        res.push(position[i][j]);
+      }
+      if (checkResult(res)) {
+        return checkResult(res);
+      }
+    }
+    return undefined;
+  };
+
+  const checkColumns = () => {
+    for (let i = 0; i < position[0].length; i += 1) {
+      const res = [];
+      for (let j = 0; j < position.length; j += 1) {
+        res.push(position[j][i]);
+      }
+      if (checkResult(res)) {
+        return checkResult(res);
+      }
+    }
+    return undefined;
+  };
+
+  const crossCheck = () => {
+    let res = [];
+    for (let i = 0; i < position.length; i += 1) {
+      res.push(position[i][i]);
+    }
+
+    if (checkResult(res)) {
+      return checkResult(res);
+    }
+
+    res = [];
+
+    for (let i = 0; i < position.length; i += 1) {
+      res.push(position[i][2 - i]);
+    }
+
+    if (checkResult(res)) {
+      return checkResult(res);
+    }
+
+    return undefined;
+  };
+
+  return checkRows() || checkColumns() || crossCheck() || undefined;
 }
 
 
