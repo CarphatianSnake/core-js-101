@@ -103,8 +103,18 @@ function memoize(func) {
  * retryer() => 2
  */
 
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return () => {
+    try {
+      const res = func();
+      if (res === attempts) {
+        return attempts;
+      }
+      return res;
+    } catch (e) {
+      return retry(func, attempts)();
+    }
+  };
 }
 
 
