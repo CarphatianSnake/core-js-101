@@ -143,25 +143,21 @@ function retry(func, attempts) {
  */
 function logger(func, logFunc) {
   return (...args) => {
-    const string = `${func.name}(${args})`;
+    const stringifiedArgs = args.map((item) => (
+      Array.isArray(item)
+        ? `[${item.map((itm) => (
+          typeof itm === 'string'
+            ? `"${itm}"`
+            : itm))}]`
+        : item
+    ));
+    const string = `${func.name}(${stringifiedArgs})`;
     logFunc(`${string} starts`);
     const res = func(...args);
     logFunc(`${string} ends`);
     return res;
   };
 }
-
-// let log = '';
-// const logFunc = (text) => {
-//   log += `${text}\n`;
-//   return log;
-// };
-// const testLogger = function (param, index) {
-//   return param[index];
-// };
-// const lg = logger(testLogger, console.log);
-// const result = lg(["expected","test",1],0);
-// console.log(result);
 
 
 /**
