@@ -117,36 +117,76 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-const cssSelectorBuilder = {
+class SelectorBuilder {
+  constructor(value = '', elementCount = 0) {
+    this.value = value;
+    this.elementCount = elementCount;
+    this.elementsSymbols = ['', '#', '.', '[', ':', '::'];
+  }
 
-  element(/* value */) {
-    throw new Error('Not implemented');
-  },
+  isError(selector) {
+    const { value, elementCount, elementsSymbols } = this;
+    const isElementRepeats = selector === '' && elementCount > 0;
+    const isIdOrPseudoRepeats = (selector === '#' || selector === '::') && value.includes(selector);
 
-  id(/* value */) {
-    throw new Error('Not implemented');
-  },
+    if (isElementRepeats || isIdOrPseudoRepeats) {
+      throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    }
 
-  class(/* value */) {
-    throw new Error('Not implemented');
-  },
+    const index = elementsSymbols.indexOf(selector);
+    const errorSelectors = elementsSymbols.slice(index + 1);
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
-  },
+    errorSelectors.forEach((sel) => {
+      if (value.includes(sel)) {
+        throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+      }
+    });
+  }
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
-  },
+  element(v) {
+    this.isError('');
+    return new SelectorBuilder(this.value + v, this.elementCount + 1);
+  }
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
-  },
+  id(v) {
+    this.isError('#');
+    return new SelectorBuilder(`${this.value}#${v}`, this.elementCount);
+  }
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
-  },
-};
+  class(v) {
+    this.isError('.');
+    return new SelectorBuilder(`${this.value}.${v}`, this.elementCount);
+  }
+
+  attr(v) {
+    this.isError('[');
+    return new SelectorBuilder(`${this.value}[${v}]`, this.elementCount);
+  }
+
+  pseudoClass(v) {
+    this.isError(':');
+    return new SelectorBuilder(`${this.value}:${v}`, this.elementCount);
+  }
+
+  pseudoElement(v) {
+    this.isError('::');
+    return new SelectorBuilder(`${this.value}::${v}`, this.elementCount);
+  }
+
+  combine(selector1, combiner, selector2) {
+    this.value = `${selector1.stringify()} ${combiner} ${selector2.stringify()}`;
+    const result = this.value;
+    this.value = '';
+    return new SelectorBuilder(result);
+  }
+
+  stringify() {
+    this.elementCount = 0;
+    return this.value;
+  }
+}
+
+const cssSelectorBuilder = new SelectorBuilder();
 
 module.exports = {
   Rectangle,
